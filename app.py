@@ -10,6 +10,10 @@ class APICallRequest(BaseModel):
     body: dict | None = Field(default=None, example={"key": "value"})
     headers: dict | None = Field(default=None, example={"Authorization": "Bearer token"})
 
+@app.get("/health")
+async def health_check():
+    return {"status": "OK"}
+
 @app.post("/call-api")
 async def call_api(payload: APICallRequest):
     method = payload.method.upper()
